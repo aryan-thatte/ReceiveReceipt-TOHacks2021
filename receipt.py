@@ -1,8 +1,10 @@
 from prettytable import PrettyTable
 from decimal import Decimal
-import datetime
+from datetime import datetime
+import yagmail
 
-print('--------------WELCOME TO XYZ Shop--------------\n')
+
+print('--------------WELCOME TO Walmart--------------\n')
 table = PrettyTable(['Item Name', 'Item Price'])
 total = 0
 
@@ -26,8 +28,20 @@ print(table)
 print('\nThanks for shopping with us :)')
 print('Your total bill amount is ', total, '/-')
 
-X = datetime.datetime.now()
-f_name = (x.strftime("%X"))
+
 table_txt = table.get_string()
-with open('%.csv' % f_name,'w') as file:
+with open('receipt.csv', 'w') as file:
     file.write(table_txt)
+
+
+receiver = input("Email: ")
+body = "Attatched is your receipt"
+filename = input("File Name: receipt.csv")
+
+yag = yagmail.SMTP('ReceiverReceipt@gmail.com', 'aryansahirelysia123')
+yag.send(
+    to=receiver,
+    subject="Your Receipt",
+    contents=body, 
+    attachments=filename,
+)
