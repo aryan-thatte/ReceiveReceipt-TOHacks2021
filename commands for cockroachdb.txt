@@ -1,0 +1,24 @@
+Before:
+cd Code
+cd ReceiveReceipt-TOHacks2020
+
+1) cockroach start-single-node --insecure --listen-addr=localhost:26257 --http-addr=localhost:8080
+
+in new terminal:
+
+2) cockroach sql --insecure
+
+3) CREATE TABLE items(id INT, first_name STRING, email STRING, item STRING, price DECIMAL);
+
+4) INSERT INTO items VALUES (1, 'Aryan', 'aryan.thatte@gmail.com', 'milk', 8.60);
+   INSERT INTO items VALUES (1, 'Aryan', 'aryan.thatte@gmail.com', 'beef', 11.34);
+   INSERT INTO items VALUES (2, 'Elysia', 'elysiawang18@gmail.com', 'banana', 3.14);
+   INSERT INTO items VALUES (3, 'Sahir', 'sahirbandali12@gmail.com', 'yogurt', 23.32);
+   INSERT INTO items VALUES (1, 'Aryan', 'aryan.thatte@gmail.com', 'dragon fruit', 45.65);
+
+in new terminal:
+
+5) cd Code
+   cd ReceiveReceipt-TOHacks2020
+
+6) cockroach sql -e "SELECT * from items WHERE id = 1;" --format=csv > my.csv;
